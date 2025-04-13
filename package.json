@@ -4,9 +4,6 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "devDependencies": {
-    "@tauri-apps/cli": "^1.4.0"
-  },
   "dependencies": {
     "vite": "^4.4.2"
   }
