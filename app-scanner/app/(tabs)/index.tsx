@@ -1,11 +1,6 @@
 import {useState} from "react";
-import {Image, StyleSheet, Platform, View, Button, TouchableOpacity, Text} from 'react-native';
-import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {CameraType, CameraView, useCameraPermissions} from 'expo-camera';
 
 export default function HomeScreen() {
     const [facing, setFacing] = useState<CameraType>('back');
@@ -32,7 +27,13 @@ export default function HomeScreen() {
 
     return (
         <View style={styles.container}>
-            <CameraView style={styles.camera} facing={facing}>
+            <CameraView
+                style={styles.camera}
+                facing={facing}
+                onBarcodeScanned={(scanningResult) => {
+                    console.log({scanningResult})
+                }}
+            >
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
                         <Text style={styles.text}>Flip Camera</Text>
