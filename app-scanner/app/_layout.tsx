@@ -1,6 +1,6 @@
 import {Text, View} from "react-native";
 import {DarkTheme, DefaultTheme, ThemeProvider} from '@react-navigation/native';
-import {TamaguiProvider} from 'tamagui';
+import {PortalProvider, TamaguiProvider} from 'tamagui';
 import {useFonts} from 'expo-font';
 import {Stack} from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -20,20 +20,20 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
     const {success, error} = useMigrations(db, migrations);
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+    const colorScheme = useColorScheme();
+    const [loaded] = useFonts({
+        SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    });
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
+    useEffect(() => {
+        if (loaded) {
+            SplashScreen.hideAsync();
+        }
+    }, [loaded]);
+
+    if (!loaded) {
+        return null;
     }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
 
     if (error) {
         return (
@@ -50,17 +50,19 @@ export default function RootLayout() {
         );
     }
 
-  return (
-      <TamaguiProvider config={config}>
-        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-            <NiceModal.Provider>
-                <Stack>
-                    <Stack.Screen name="(tabs)" options={{headerShown: false}}/>
-                    <Stack.Screen name="+not-found"/>
-                </Stack>
-                <StatusBar style="auto"/>
-            </NiceModal.Provider>
-        </ThemeProvider>
-      </TamaguiProvider>
-  );
+    return (
+        <TamaguiProvider config={config}>
+            <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+                <PortalProvider shouldAddRootHost>
+                    <NiceModal.Provider>
+                        <Stack>
+                            <Stack.Screen name="(tabs)" options={{headerShown: false}}/>
+                            <Stack.Screen name="+not-found"/>
+                        </Stack>
+                        <StatusBar style="auto"/>
+                    </NiceModal.Provider>
+                </PortalProvider>
+            </ThemeProvider>
+        </TamaguiProvider>
+    );
 }

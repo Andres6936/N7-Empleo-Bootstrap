@@ -1,5 +1,6 @@
 import {Image, Platform, StyleSheet} from 'react-native';
 import {Button, Paragraph} from "tamagui";
+import NiceModal from "@ebay/nice-modal-react";
 
 import {Collapsible} from '@/components/Collapsible';
 import {ExternalLink} from '@/components/ExternalLink';
@@ -7,12 +8,11 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import {ThemedText} from '@/components/ThemedText';
 import {ThemedView} from '@/components/ThemedView';
 import {IconSymbol} from '@/components/ui/IconSymbol';
-import NiceModal from "@ebay/nice-modal-react";
 import AddNewProductModal from "@/modals/AddNewProductModal";
 
 export default function TabTwoScreen() {
     const onAddEvent = async () => {
-        NiceModal.show(AddNewProductModal, {})
+        await NiceModal.show(AddNewProductModal, {})
     }
 
     const onEditEvent = async () => {
