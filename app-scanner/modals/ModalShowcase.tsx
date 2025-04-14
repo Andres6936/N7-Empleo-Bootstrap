@@ -7,7 +7,7 @@ export default NiceModal.create(() => {
     const modal = useModal();
 
     return (
-        <SafeAreaView style={styles.centeredView}>
+        <SafeAreaView style={[styles.centeredView, StyleSheet.absoluteFill]}>
             <Modal
                 animationType="slide"
                 transparent={true}
