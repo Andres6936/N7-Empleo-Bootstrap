@@ -1,12 +1,13 @@
 import {AlertDialog, Button, XStack, YStack} from 'tamagui'
-import NiceModal from "@ebay/nice-modal-react";
+import NiceModal, {useModal} from "@ebay/nice-modal-react";
 
 export default NiceModal.create(() => {
+    // Use a hook to manage the modal state
+    const modal = useModal();
+
     return (
-        <AlertDialog native>
-            <AlertDialog.Trigger asChild>
-                <Button>Show Alert</Button>
-            </AlertDialog.Trigger>
+        <AlertDialog open={modal.visible} native>
+            <AlertDialog.Trigger/>
 
             <AlertDialog.Portal>
                 <AlertDialog.Overlay
@@ -43,10 +44,16 @@ export default NiceModal.create(() => {
 
                         <XStack gap="$3" justifyContent="flex-end">
                             <AlertDialog.Cancel asChild>
-                                <Button>Cancel</Button>
+                                <Button onPress={() => {
+                                    modal.reject();
+                                    modal.remove();
+                                }}>Cancel</Button>
                             </AlertDialog.Cancel>
                             <AlertDialog.Action asChild>
-                                <Button theme="accent">Accept</Button>
+                                <Button onPress={() => {
+                                    modal.resolve();
+                                    modal.remove();
+                                }} theme="accent">Accept</Button>
                             </AlertDialog.Action>
                         </XStack>
                     </YStack>
