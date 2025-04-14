@@ -1,9 +1,7 @@
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Alert, Modal, StyleSheet, View} from "react-native";
 import NiceModal, {useModal} from "@ebay/nice-modal-react";
-import {Button} from "tamagui";
-
-import {ThemedText} from "@/components/ThemedText";
+import {Button, Paragraph} from "tamagui";
 
 export default NiceModal.create(() => {
     // Use a hook to manage the modal state
@@ -21,13 +19,13 @@ export default NiceModal.create(() => {
                 }}>
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <ThemedText>Hello World!</ThemedText>
+                        <Paragraph>Hello World!</Paragraph>
                         <Button
                             onPress={() => {
                                 modal.resolve();
                                 modal.remove();
                             }}>
-                            <ThemedText>Hide Modal</ThemedText>
+                            <Paragraph>Hide Modal</Paragraph>
                         </Button>
                     </View>
                 </View>
