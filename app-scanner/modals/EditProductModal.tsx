@@ -10,7 +10,6 @@ export default NiceModal.create(() => {
             open={modal.visible}
             onOpenChange={(open: boolean) => {
                 if (!open) {
-                    modal.resolve();
                     modal.remove();
                 }
             }}
