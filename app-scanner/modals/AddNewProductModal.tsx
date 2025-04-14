@@ -35,6 +35,12 @@ export default NiceModal.create(() => {
             forceRemoveScrollEnabled={modal.visible}
             modal={modal.visible}
             open={modal.visible}
+            onOpenChange={(open: boolean) => {
+                if (!open) {
+                    modal.resolve();
+                    modal.remove();
+                }
+            }}
             dismissOnSnapToBottom
             zIndex={100_000}
             animation="medium"
