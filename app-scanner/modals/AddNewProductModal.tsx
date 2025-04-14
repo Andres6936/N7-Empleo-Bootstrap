@@ -2,33 +2,9 @@ import {H2, Paragraph, Sheet, YStack} from 'tamagui'
 import NiceModal, {useModal} from "@ebay/nice-modal-react";
 import React from "react";
 
-
-const spModes = ['percent', 'constant', 'fit', 'mixed'] as const
-
 export default NiceModal.create(() => {
     // Use a hook to manage the modal state
     const modal = useModal();
-
-    const [position, setPosition] = React.useState(0)
-    const [open, setOpen] = React.useState(false)
-    const [innerOpen, setInnerOpen] = React.useState(false)
-    const [snapPointsMode, setSnapPointsMode] =
-        React.useState<(typeof spModes)[number]>('percent')
-    const [mixedFitDemo, setMixedFitDemo] = React.useState(false)
-
-    const isPercent = snapPointsMode === 'percent'
-    const isConstant = snapPointsMode === 'constant'
-    const isFit = snapPointsMode === 'fit'
-    const isMixed = snapPointsMode === 'mixed'
-    const snapPoints = isPercent
-        ? [85, 50, 25]
-        : isConstant
-            ? [256, 190]
-            : isFit
-                ? undefined
-                : mixedFitDemo
-                    ? ['fit', 110]
-                    : ['80%', 256, 190]
 
     return (
         <Sheet
