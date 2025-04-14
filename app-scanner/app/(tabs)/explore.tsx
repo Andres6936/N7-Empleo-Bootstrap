@@ -9,6 +9,7 @@ import {ThemedText} from '@/components/ThemedText';
 import {ThemedView} from '@/components/ThemedView';
 import {IconSymbol} from '@/components/ui/IconSymbol';
 import AddNewProductModal from "@/modals/AddNewProductModal";
+import EditProductModal from "@/modals/EditProductModal";
 
 export default function TabTwoScreen() {
     const onAddEvent = async () => {
@@ -16,7 +17,7 @@ export default function TabTwoScreen() {
     }
 
     const onEditEvent = async () => {
-
+        await NiceModal.show(EditProductModal, {})
     }
 
   return (
