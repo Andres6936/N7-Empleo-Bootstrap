@@ -107,8 +107,8 @@ export default function TabTwoScreen() {
             <XStack px="$2" rounded="$2" borderWidth={1} borderColor="$borderColor">
                 <Paragraph flex={2}>Arroz Diana</Paragraph>
                 <XStack flex={1} justify="flex-end">
-                    <Paragraph flex={2} textWrap="nowrap">2300 COP</Paragraph>
-                    <Paragraph flex={1}>1</Paragraph>
+                    <Paragraph flex={2} textAlign="center" textWrap="nowrap">2300 COP</Paragraph>
+                    <Paragraph flex={1} textAlign="center">1</Paragraph>
                 </XStack>
             </XStack>
 
