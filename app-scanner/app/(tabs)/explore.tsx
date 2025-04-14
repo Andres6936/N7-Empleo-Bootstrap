@@ -8,8 +8,8 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import {ThemedText} from '@/components/ThemedText';
 import {ThemedView} from '@/components/ThemedView';
 import {IconSymbol} from '@/components/ui/IconSymbol';
-import AddNewProductModal from "@/modals/AddNewProductModal";
-import EditProductModal from "@/modals/EditProductModal";
+import AddNewProductModal from "@/modals/SheetShowcase";
+import EditProductModal from "@/modals/AlertShowcase";
 
 export default function TabTwoScreen() {
     const onAddEvent = async () => {
