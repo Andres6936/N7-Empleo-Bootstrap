@@ -43,10 +43,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     modalView: {
-        margin: 20,
+        margin: 18,
         backgroundColor: 'white',
         borderRadius: 8,
-        padding: 35,
+        padding: 18,
         alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: {
