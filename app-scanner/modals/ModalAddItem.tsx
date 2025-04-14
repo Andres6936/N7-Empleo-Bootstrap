@@ -60,7 +60,8 @@ export default NiceModal.create(() => {
                             </YStack>
 
                             <Form.Trigger asChild disabled={status !== 'off'}>
-                                <Button mt="$4" icon={status === 'submitting' ? () => <Spinner/> : undefined}>
+                                <Button minWidth="100%" mt="$4"
+                                        icon={status === 'submitting' ? () => <Spinner/> : undefined}>
                                     Confirmar
                                 </Button>
                             </Form.Trigger>
