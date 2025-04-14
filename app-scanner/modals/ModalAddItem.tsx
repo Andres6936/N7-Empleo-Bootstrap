@@ -2,7 +2,7 @@ import React from "react";
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Alert, Modal, StyleSheet, View} from "react-native";
 import NiceModal, {useModal} from "@ebay/nice-modal-react";
-import {Button, Form, H6, Input, Label, Spinner, Switch, XStack, YStack} from "tamagui";
+import {Button, Form, H6, Input, Label, Spinner, XStack, YStack} from "tamagui";
 
 export default NiceModal.create(() => {
     // Use a hook to manage the modal state
@@ -34,26 +34,33 @@ export default NiceModal.create(() => {
                         >
                             <H6>Añadir nuevo item</H6>
 
-                            <YStack minWidth="100%" padding="$3" space="$4">
-                                <XStack alignItems="center" space="$4">
-                                    <Label htmlFor="name">
-                                        Name
+                            <YStack minWidth="100%" padding="$2" gap="$2">
+                                <YStack>
+                                    <Label htmlFor="name" lineHeight="$2">
+                                        Nombre
                                     </Label>
-                                    <Input flex={1} id="name" defaultValue="Nate Wienert"/>
-                                </XStack>
+                                    <Input width="100%" id="name" defaultValue="Nate Wienert"/>
+                                </YStack>
 
-                                <XStack alignItems="center" space="$4">
-                                    <Label htmlFor="notify">
-                                        Notifications
-                                    </Label>
-                                    <Switch id="notify">
-                                        <Switch.Thumb animation="quick"/>
-                                    </Switch>
+                                <XStack gap="$2">
+                                    <YStack flex={1}>
+                                        <Label htmlFor="value" lineHeight="$2">
+                                            Valor
+                                        </Label>
+                                        <Input width="100%" id="value" defaultValue="Nate Wienert"/>
+                                    </YStack>
+
+                                    <YStack flex={1}>
+                                        <Label htmlFor="amount" lineHeight="$2">
+                                            Cantidad
+                                        </Label>
+                                        <Input width="100%" id="amount" defaultValue="Nate Wienert"/>
+                                    </YStack>
                                 </XStack>
                             </YStack>
 
                             <Form.Trigger asChild disabled={status !== 'off'}>
-                                <Button icon={status === 'submitting' ? () => <Spinner/> : undefined}>
+                                <Button mt="$4" icon={status === 'submitting' ? () => <Spinner/> : undefined}>
                                     Confirmar
                                 </Button>
                             </Form.Trigger>
