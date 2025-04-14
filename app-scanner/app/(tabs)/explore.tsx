@@ -9,11 +9,11 @@ import {ThemedText} from '@/components/ThemedText';
 import {ThemedView} from '@/components/ThemedView';
 import {IconSymbol} from '@/components/ui/IconSymbol';
 import EditProductModal from "@/modals/AlertShowcase";
-import ModalShowcase from "@/modals/ModalShowcase";
+import ModalAddItem from "@/modals/ModalAddItem";
 
 export default function TabTwoScreen() {
     const onAddEvent = async () => {
-        await NiceModal.show(ModalShowcase, {})
+        await NiceModal.show(ModalAddItem, {})
     }
 
     const onEditEvent = async () => {
