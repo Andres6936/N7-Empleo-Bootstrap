@@ -39,11 +39,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.2)',
     },
     modalView: {
         margin: 20,
         backgroundColor: 'white',
-        borderRadius: 20,
+        borderRadius: 8,
         padding: 35,
         alignItems: 'center',
         shadowColor: '#000',
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     button: {
-        borderRadius: 20,
+        borderRadius: 8,
         padding: 10,
         elevation: 2,
     },
