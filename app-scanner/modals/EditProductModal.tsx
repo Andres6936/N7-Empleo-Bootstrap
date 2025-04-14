@@ -6,7 +6,15 @@ export default NiceModal.create(() => {
     const modal = useModal();
 
     return (
-        <AlertDialog open={modal.visible} native>
+        <AlertDialog
+            open={modal.visible}
+            onOpenChange={(open: boolean) => {
+                if (!open) {
+                    modal.resolve();
+                    modal.remove();
+                }
+            }}
+            native>
             <AlertDialog.Trigger/>
 
             <AlertDialog.Portal>
