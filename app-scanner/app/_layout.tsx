@@ -13,6 +13,7 @@ import {useColorScheme} from '@/hooks/useColorScheme';
 import {config} from "@/tamagui.config";
 import migrations from '@/drizzle/migrations';
 import {db} from "@/services/sqlite/createClient";
+import NiceModal from "@ebay/nice-modal-react";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -52,11 +53,13 @@ export default function RootLayout() {
   return (
       <TamaguiProvider config={config}>
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{headerShown: false}}/>
-            <Stack.Screen name="+not-found"/>
-          </Stack>
-          <StatusBar style="auto"/>
+            <NiceModal.Provider>
+                <Stack>
+                    <Stack.Screen name="(tabs)" options={{headerShown: false}}/>
+                    <Stack.Screen name="+not-found"/>
+                </Stack>
+                <StatusBar style="auto"/>
+            </NiceModal.Provider>
         </ThemeProvider>
       </TamaguiProvider>
   );

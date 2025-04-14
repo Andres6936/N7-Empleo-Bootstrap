@@ -1,13 +1,24 @@
-import { StyleSheet, Image, Platform } from 'react-native';
+import {Image, Platform, StyleSheet} from 'react-native';
+import {Button, Paragraph} from "tamagui";
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
+import {Collapsible} from '@/components/Collapsible';
+import {ExternalLink} from '@/components/ExternalLink';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+import {ThemedText} from '@/components/ThemedText';
+import {ThemedView} from '@/components/ThemedView';
+import {IconSymbol} from '@/components/ui/IconSymbol';
+import NiceModal from "@ebay/nice-modal-react";
+import AddNewProductModal from "@/modals/AddNewProductModal";
 
 export default function TabTwoScreen() {
+    const onAddEvent = async () => {
+        NiceModal.show(AddNewProductModal, {})
+    }
+
+    const onEditEvent = async () => {
+
+    }
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
@@ -91,6 +102,13 @@ export default function TabTwoScreen() {
           ),
         })}
       </Collapsible>
+
+        <Button onPress={onAddEvent}>
+            <Paragraph>Agregar</Paragraph>
+        </Button>
+        <Button onPress={onEditEvent}>
+            <Paragraph>Editar</Paragraph>
+        </Button>
     </ParallaxScrollView>
   );
 }
