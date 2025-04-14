@@ -8,12 +8,12 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import {ThemedText} from '@/components/ThemedText';
 import {ThemedView} from '@/components/ThemedView';
 import {IconSymbol} from '@/components/ui/IconSymbol';
-import AddNewProductModal from "@/modals/SheetShowcase";
 import EditProductModal from "@/modals/AlertShowcase";
+import ModalShowcase from "@/modals/ModalShowcase";
 
 export default function TabTwoScreen() {
     const onAddEvent = async () => {
-        await NiceModal.show(AddNewProductModal, {})
+        await NiceModal.show(ModalShowcase, {})
     }
 
     const onEditEvent = async () => {
