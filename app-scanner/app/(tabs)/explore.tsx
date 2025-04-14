@@ -1,5 +1,5 @@
 import {Image, Platform, StyleSheet} from 'react-native';
-import {Button, Paragraph, XStack} from "tamagui";
+import {Button, Paragraph, XStack, YStack} from "tamagui";
 import NiceModal from "@ebay/nice-modal-react";
 
 import {Collapsible} from '@/components/Collapsible';
@@ -104,13 +104,12 @@ export default function TabTwoScreen() {
                 })}
             </Collapsible>
 
-            <XStack px="$2" rounded="$2" borderWidth={1} borderColor="$borderColor">
-                <Paragraph flex={2}>Arroz Diana</Paragraph>
-                <XStack flex={1} justify="flex-end">
-                    <Paragraph flex={2} textAlign="center" textWrap="nowrap">2300 COP</Paragraph>
-                    <Paragraph flex={1} textAlign="center">1</Paragraph>
-                </XStack>
-            </XStack>
+            <YStack gap="$2">
+                <Item/>
+                <Item/>
+                <Item/>
+                <Item/>
+            </YStack>
 
             <Button onPress={onAddEvent}>
                 <Paragraph>Agregar</Paragraph>
@@ -120,6 +119,18 @@ export default function TabTwoScreen() {
             </Button>
         </ParallaxScrollView>
     );
+}
+
+const Item = () => {
+    return (
+        <XStack px="$2" rounded="$2" borderWidth={1} borderColor="$borderColor">
+            <Paragraph flex={2}>Arroz Diana</Paragraph>
+            <XStack flex={1} justify="flex-end">
+                <Paragraph flex={2} textAlign="center" textWrap="nowrap">2300 COP</Paragraph>
+                <Paragraph flex={1} textAlign="center">1</Paragraph>
+            </XStack>
+        </XStack>
+    )
 }
 
 const styles = StyleSheet.create({
