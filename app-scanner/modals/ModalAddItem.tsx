@@ -29,7 +29,7 @@ export default NiceModal.create(() => {
     }))
 
     return (
-        <SafeAreaView style={[styles.centeredView, StyleSheet.absoluteFill]}>
+        <SafeAreaView style={[styles.centeredView, StyleSheet.absoluteFill, {backgroundColor: 'rgba(0,0,0,0.5)'}]}>
             <Modal
                 animationType="slide"
                 transparent={true}
