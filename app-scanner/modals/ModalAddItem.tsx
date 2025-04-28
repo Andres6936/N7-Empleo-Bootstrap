@@ -14,7 +14,7 @@ const getIntegerValueOf = (value: string) => {
 const defaultValues = {
     Name: "",
     Value: 0,
-    Amount: 0,
+    Amount: 1,
 }
 
 export type Props = {
