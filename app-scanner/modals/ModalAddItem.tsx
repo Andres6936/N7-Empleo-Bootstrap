@@ -11,15 +11,21 @@ const getIntegerValueOf = (value: string) => {
     return isNaN(numeric) ? 0 : numeric;
 }
 
+const defaultValues = {
+    Name: "",
+    Value: 0,
+    Amount: 0,
+}
+
+export type Props = {
+    onConfirm: (event: { values: typeof defaultValues }) => Promise<void> | void,
+}
+
 export default NiceModal.create(() => {
     // Use a hook to manage the modal state
     const modal = useModal();
     const form = useForm(({
-        defaultValues: {
-            Name: "",
-            Value: 0,
-            Amount: 0,
-        },
+        defaultValues: defaultValues,
         onSubmit: async ({value}) => {
             console.log("closing")
 
