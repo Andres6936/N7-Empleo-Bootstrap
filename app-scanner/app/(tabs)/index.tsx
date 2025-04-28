@@ -6,6 +6,7 @@ import NiceModal from "@ebay/nice-modal-react";
 import ModalAddItem, {Props as ModalAddItemProps} from "@/modals/ModalAddItem";
 import {db} from "@/services/sqlite/createClient";
 import {ProductsTable} from "@/services/sqlite/schema";
+import {TypeCurrency} from "@/constants/Types";
 
 export default function HomeScreen() {
     const [facing, setFacing] = useState<CameraType>('back');
@@ -46,6 +47,7 @@ export default function HomeScreen() {
                                 Name: values.Name,
                                 Amount: values.Amount,
                                 Value: values.Value,
+                                Currency: TypeCurrency.COP,
                             })
                         },
                     } satisfies ModalAddItemProps)
