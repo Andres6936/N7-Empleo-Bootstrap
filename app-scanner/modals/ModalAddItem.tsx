@@ -21,16 +21,20 @@ export type Props = {
     onConfirm: (event: { values: typeof defaultValues }) => Promise<void> | void,
 }
 
-export default NiceModal.create(() => {
+export default NiceModal.create((props: Props) => {
     // Use a hook to manage the modal state
     const modal = useModal();
     const form = useForm(({
         defaultValues: defaultValues,
         onSubmit: async ({value}) => {
-            console.log("closing")
-
-            modal.resolve();
-            modal.remove();
+            const cleanUp = async () => {
+                modal.resolve();
+                modal.remove();
+            }
+            return await Promise.all([
+                cleanUp(),
+                props.onConfirm({values: value}),
+            ])
         }
     }))
 
