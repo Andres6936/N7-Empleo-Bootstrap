@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "683fb9a7-a590-422c-bc0d-fe24593a55b8",
+  "id": "0c8cbfd1-7efe-4894-81a2-6e3f3d1994a6",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "Products": {
@@ -16,6 +16,13 @@
         },
         "TypeBarCode": {
           "name": "TypeBarCode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "Currency": {
+          "name": "Currency",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
