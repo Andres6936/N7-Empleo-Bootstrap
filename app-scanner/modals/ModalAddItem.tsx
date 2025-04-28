@@ -22,8 +22,6 @@ export default NiceModal.create(() => {
         }
     }))
 
-    const [status, setStatus] = React.useState<'off' | 'submitting' | 'submitted'>('off')
-
     return (
         <SafeAreaView style={[styles.centeredView, StyleSheet.absoluteFill]}>
             <Modal
@@ -93,7 +91,7 @@ export default NiceModal.create(() => {
                                         <Button
                                             minWidth="100%"
                                             mt="$4"
-                                            icon={status === 'submitting' ? () => <Spinner/> : undefined}>
+                                            icon={isSubmitted ? () => <Spinner/> : undefined}>
                                             Confirmar
                                         </Button>
                                     </Form.Trigger>
