@@ -56,7 +56,7 @@ export default function RootLayout() {
 
     return (
         <SafeAreaProvider>
-            <TamaguiProvider config={config}>
+            <TamaguiProvider config={config} defaultTheme={colorScheme || 'light' as const}>
                 <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
                     <PortalProvider shouldAddRootHost>
                         <NiceModal.Provider>
