@@ -7,6 +7,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import {StatusBar} from 'expo-status-bar';
 import {useEffect} from 'react';
 import 'react-native-reanimated';
+import {useDrizzleStudio} from "expo-drizzle-studio-plugin";
 import {useMigrations} from 'drizzle-orm/expo-sqlite/migrator';
 import NiceModal from "@ebay/nice-modal-react";
 import {SafeAreaProvider} from "react-native-safe-area-context";
@@ -14,12 +15,14 @@ import {SafeAreaProvider} from "react-native-safe-area-context";
 import {useColorScheme} from '@/hooks/useColorScheme';
 import {config} from "@/tamagui.config";
 import migrations from '@/drizzle/migrations';
-import {db} from "@/services/sqlite/createClient";
+import {db, scannerConnection} from "@/services/sqlite/createClient";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+    useDrizzleStudio(scannerConnection);
+
     const {success, error} = useMigrations(db, migrations);
     const colorScheme = useColorScheme();
     const [loaded] = useFonts({
