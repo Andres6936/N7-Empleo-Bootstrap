@@ -79,7 +79,7 @@ export default function App() {
 }
 ```
 
-Run and Expo app on physical device, simulator or emulator which supports Expo SQLite. Web doesn't support SQLite.
+Run and Expo app on a physical device, simulator, or emulator which supports Expo SQLite. Web doesn't support SQLite.
 
 ```shell
 npx expo start
