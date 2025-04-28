@@ -136,10 +136,12 @@ export default NiceModal.create((props: Props) => {
                                 )}
                             />
 
-                            <Button minWidth="100%" onPress={() => {
-                                modal.reject();
-                                modal.remove();
-                            }}>
+                            <Button
+                                minWidth="100%"
+                                onPress={() => {
+                                    modal.reject();
+                                    modal.remove();
+                                }}>
                                 Cancelar
                             </Button>
                         </Form>
