@@ -11,8 +11,8 @@ export default NiceModal.create(() => {
     const form = useForm(({
         defaultValues: {
             Name: "",
-            Value: 0,
-            Amount: 0,
+            Value: "",
+            Amount: "",
         },
         onSubmit: async ({value}) => {
             console.log("closing")
@@ -48,10 +48,16 @@ export default NiceModal.create(() => {
                                     name="Name"
                                     children={(field) => (
                                         <YStack>
-                                            <Label htmlFor="name" lineHeight="$2">
+                                            <Label htmlFor={field.name} lineHeight="$2">
                                                 Nombre
                                             </Label>
-                                            <Input width="100%" id="name" defaultValue="Nate Wienert"/>
+                                            <Input
+                                                width="100%"
+                                                id={field.name}
+                                                value={field.state.value}
+                                                onBlur={field.handleBlur}
+                                                onChangeText={(value) => field.handleChange(value)}
+                                            />
                                         </YStack>
                                     )}
                                 />
@@ -62,10 +68,18 @@ export default NiceModal.create(() => {
                                         name="Value"
                                         children={(field) => (
                                             <YStack flex={1}>
-                                                <Label htmlFor="value" lineHeight="$2">
+                                                <Label htmlFor={field.name} lineHeight="$2">
                                                     Valor
                                                 </Label>
-                                                <Input width="100%" id="value" defaultValue="Nate Wienert"/>
+                                                <Input
+                                                    width="100%"
+                                                    id={field.name}
+                                                    inputMode='numeric'
+                                                    keyboardType='numeric'
+                                                    value={field.state.value}
+                                                    onBlur={field.handleBlur}
+                                                    onChangeText={(value) => field.handleChange(value)}
+                                                />
                                             </YStack>
                                         )}
                                     />
@@ -74,10 +88,18 @@ export default NiceModal.create(() => {
                                         name="Amount"
                                         children={(field) => (
                                             <YStack flex={1}>
-                                                <Label htmlFor="amount" lineHeight="$2">
+                                                <Label htmlFor={field.name} lineHeight="$2">
                                                     Cantidad
                                                 </Label>
-                                                <Input width="100%" id="amount" defaultValue="Nate Wienert"/>
+                                                <Input
+                                                    width="100%"
+                                                    id={field.name}
+                                                    inputMode='numeric'
+                                                    keyboardType='numeric'
+                                                    value={field.state.value}
+                                                    onBlur={field.handleBlur}
+                                                    onChangeText={(value) => field.handleChange(value)}
+                                                />
                                             </YStack>
                                         )}
                                     />
