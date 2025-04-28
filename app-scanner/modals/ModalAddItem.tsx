@@ -5,14 +5,20 @@ import NiceModal, {useModal} from "@ebay/nice-modal-react";
 import {Button, Form, H6, Input, Label, Spinner, View, XStack, YStack} from "tamagui";
 import {useForm} from "@tanstack/react-form";
 
+const getIntegerValueOf = (value: string) => {
+    const parsed = value.replace(/[^0-9]/g, '');
+    const numeric = parseInt(parsed, 10);
+    return isNaN(numeric) ? 0 : numeric;
+}
+
 export default NiceModal.create(() => {
     // Use a hook to manage the modal state
     const modal = useModal();
     const form = useForm(({
         defaultValues: {
             Name: "",
-            Value: "",
-            Amount: "",
+            Value: 0,
+            Amount: 0,
         },
         onSubmit: async ({value}) => {
             console.log("closing")
@@ -76,9 +82,9 @@ export default NiceModal.create(() => {
                                                     id={field.name}
                                                     inputMode='numeric'
                                                     keyboardType='numeric'
-                                                    value={field.state.value}
+                                                    value={field.state.value.toString()}
                                                     onBlur={field.handleBlur}
-                                                    onChangeText={(value) => field.handleChange(value)}
+                                                    onChangeText={(value) => field.handleChange(getIntegerValueOf(value))}
                                                 />
                                             </YStack>
                                         )}
@@ -96,9 +102,9 @@ export default NiceModal.create(() => {
                                                     id={field.name}
                                                     inputMode='numeric'
                                                     keyboardType='numeric'
-                                                    value={field.state.value}
+                                                    value={field.state.value.toString()}
                                                     onBlur={field.handleBlur}
-                                                    onChangeText={(value) => field.handleChange(value)}
+                                                    onChangeText={(value) => field.handleChange(getIntegerValueOf(value))}
                                                 />
                                             </YStack>
                                         )}
