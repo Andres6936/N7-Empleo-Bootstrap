@@ -1,8 +1,8 @@
 import React from "react";
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Alert, Modal, StyleSheet, View} from "react-native";
+import {Alert, Modal, StyleSheet} from "react-native";
 import NiceModal, {useModal} from "@ebay/nice-modal-react";
-import {Button, Form, H6, Input, Label, Spinner, XStack, YStack} from "tamagui";
+import {Button, Form, H6, Input, Label, Spinner, View, XStack, YStack} from "tamagui";
 
 export default NiceModal.create(() => {
     // Use a hook to manage the modal state
@@ -21,11 +21,13 @@ export default NiceModal.create(() => {
                     modal.remove();
                 }}>
                 <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
+                    <View bg="$background" style={styles.modalView}>
                         <Form
                             alignItems="center"
                             gap="$2"
                             onSubmit={() => {
+                                console.log("closing")
+
                                 modal.resolve();
                                 modal.remove();
                             }}
@@ -81,7 +83,6 @@ const styles = StyleSheet.create({
     },
     modalView: {
         margin: 18,
-        backgroundColor: 'white',
         borderRadius: 8,
         padding: 18,
         alignItems: 'center',
