@@ -9,25 +9,8 @@ import {ThemedText} from '@/components/ThemedText';
 import {ThemedView} from '@/components/ThemedView';
 import {IconSymbol} from '@/components/ui/IconSymbol';
 import EditProductModal from "@/modals/AlertShowcase";
-import ModalAddItem, {Props as ModalAddItemProps} from "@/modals/ModalAddItem";
-import {db} from "@/services/sqlite/createClient";
-import {ProductsTable} from "@/services/sqlite/schema";
 
 export default function TabTwoScreen() {
-    const onAddEvent = async () => {
-        await NiceModal.show(ModalAddItem, {
-            onConfirm: async ({values}) => {
-                await db.insert(ProductsTable).values({
-                    SKU: "EE",
-                    TypeBarCode: "E",
-                    Name: values.Name,
-                    Amount: values.Amount,
-                    Value: values.Value,
-                })
-            },
-        } satisfies ModalAddItemProps)
-    }
-
     const onEditEvent = async () => {
         await NiceModal.show(EditProductModal, {})
     }
@@ -123,9 +106,6 @@ export default function TabTwoScreen() {
                 <Item/>
             </YStack>
 
-            <Button onPress={onAddEvent}>
-                <Paragraph>Agregar</Paragraph>
-            </Button>
             <Button onPress={onEditEvent}>
                 <Paragraph>Editar</Paragraph>
             </Button>

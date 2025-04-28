@@ -1,6 +1,11 @@
 import {useState} from "react";
 import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {CameraType, CameraView, useCameraPermissions} from 'expo-camera';
+import NiceModal from "@ebay/nice-modal-react";
+
+import ModalAddItem, {Props as ModalAddItemProps} from "@/modals/ModalAddItem";
+import {db} from "@/services/sqlite/createClient";
+import {ProductsTable} from "@/services/sqlite/schema";
 
 export default function HomeScreen() {
     const [facing, setFacing] = useState<CameraType>('back');
@@ -30,8 +35,20 @@ export default function HomeScreen() {
             <CameraView
                 style={styles.camera}
                 facing={facing}
-                onBarcodeScanned={(scanningResult) => {
+                onBarcodeScanned={async (scanningResult) => {
                     console.log({scanningResult})
+
+                    await NiceModal.show(ModalAddItem, {
+                        onConfirm: async ({values}) => {
+                            await db.insert(ProductsTable).values({
+                                SKU: scanningResult.data,
+                                TypeBarCode: scanningResult.type,
+                                Name: values.Name,
+                                Amount: values.Amount,
+                                Value: values.Value,
+                            })
+                        },
+                    } satisfies ModalAddItemProps)
                 }}
             >
                 <View style={styles.buttonContainer}>
