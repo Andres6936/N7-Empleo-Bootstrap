@@ -1,15 +1,14 @@
-import {useState} from "react";
-import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {CameraType, CameraView, useCameraPermissions} from 'expo-camera';
+import {Button, StyleSheet, Text, View} from 'react-native';
+import {CameraView, useCameraPermissions} from 'expo-camera';
 import NiceModal from "@ebay/nice-modal-react";
 
 import ModalAddItem, {Props as ModalAddItemProps} from "@/modals/ModalAddItem";
 import {db} from "@/services/sqlite/createClient";
 import {ProductsTable} from "@/services/sqlite/schema";
 import {TypeCurrency} from "@/constants/Types";
+import {ScannerActions} from "@/components/scanner/ScannerActions";
 
 export default function HomeScreen() {
-    const [facing, setFacing] = useState<CameraType>('back');
     const [permission, requestPermission] = useCameraPermissions();
 
     if (!permission) {
@@ -27,15 +26,11 @@ export default function HomeScreen() {
         );
     }
 
-    function toggleCameraFacing() {
-        setFacing(current => (current === 'back' ? 'front' : 'back'));
-    }
-
     return (
         <View style={styles.container}>
             <CameraView
                 style={styles.camera}
-                facing={facing}
+                facing='back'
                 onBarcodeScanned={async (scanningResult) => {
                     console.log({scanningResult})
 
@@ -53,11 +48,7 @@ export default function HomeScreen() {
                     } satisfies ModalAddItemProps)
                 }}
             >
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
-                        <Text style={styles.text}>Flip Camera</Text>
-                    </TouchableOpacity>
-                </View>
+                <ScannerActions/>
             </CameraView>
         </View>
     );
@@ -74,21 +65,5 @@ const styles = StyleSheet.create({
     },
     camera: {
         flex: 1,
-    },
-    buttonContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor: 'transparent',
-        margin: 64,
-    },
-    button: {
-        flex: 1,
-        alignSelf: 'flex-end',
-        alignItems: 'center',
-    },
-    text: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: 'white',
     },
 });
