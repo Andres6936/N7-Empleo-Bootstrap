@@ -1,8 +1,10 @@
-import {Button} from "tamagui";
+import {Button, ButtonProps} from "tamagui";
 
-export function ScannerButton() {
+type Props = ButtonProps;
+
+export function ScannerButton(props: Props) {
     return (
-        <Button flex={1} theme='accent'>
+        <Button flex={1} theme='accent' {...props}>
             Escanear
         </Button>
     )

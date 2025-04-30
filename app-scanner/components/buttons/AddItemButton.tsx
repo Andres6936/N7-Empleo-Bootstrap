@@ -1,9 +1,11 @@
-import {Button} from "tamagui";
+import {Button, ButtonProps} from "tamagui";
 import {Plus} from "@tamagui/lucide-icons";
 
-export function AddItemButton() {
+type Props = ButtonProps;
+
+export function AddItemButton(props: Props) {
     return (
-        <Button theme='accent'>
+        <Button theme='accent' {...props}>
             <Plus/>
         </Button>
     )

@@ -1,6 +1,8 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
-import {CameraView, useCameraPermissions} from 'expo-camera';
+import {useState} from "react";
 import NiceModal from "@ebay/nice-modal-react";
+import {Button, StyleSheet, Text, View} from 'react-native';
+import {BarcodeScanningResult, CameraView, useCameraPermissions} from 'expo-camera';
+import {useThrottler} from '@tanstack/react-pacer/throttler'
 
 import ModalAddItem, {Props as ModalAddItemProps} from "@/modals/ModalAddItem";
 import {db} from "@/services/sqlite/createClient";
@@ -9,7 +11,14 @@ import {TypeCurrency} from "@/constants/Types";
 import {ScannerActions} from "@/components/scanner/ScannerActions";
 
 export default function HomeScreen() {
+    const [enabledScanner, setEnabledScanner] = useState(false);
     const [permission, requestPermission] = useCameraPermissions();
+    const [scanningResult, setScanningResult] = useState<BarcodeScanningResult | null>(null);
+
+    const throttlerSetScanningResult = useThrottler(setScanningResult, {
+        wait: 200,
+        enabled: enabledScanner,
+    })
 
     if (!permission) {
         // Camera permissions are still loading.
@@ -31,24 +40,38 @@ export default function HomeScreen() {
             <CameraView
                 style={styles.camera}
                 facing='back'
-                onBarcodeScanned={async (scanningResult) => {
-                    console.log({scanningResult})
-
-                    await NiceModal.show(ModalAddItem, {
-                        onConfirm: async ({values}) => {
-                            await db.insert(ProductsTable).values({
-                                SKU: scanningResult.data,
-                                TypeBarCode: scanningResult.type,
-                                Name: values.Name,
-                                Amount: values.Amount,
-                                Value: values.Value,
-                                Currency: TypeCurrency.COP,
-                            })
-                        },
-                    } satisfies ModalAddItemProps)
+                onBarcodeScanned={(scanningResult) => {
+                    // throttled state update
+                    throttlerSetScanningResult.maybeExecute(scanningResult)
                 }}
             >
-                <ScannerActions/>
+                <ScannerActions
+                    onScan={async () => {
+                        setEnabledScanner(true);
+
+                        setTimeout(async () => {
+                            if (!scanningResult) return;
+
+                            await NiceModal.show(ModalAddItem, {
+                                onConfirm: async ({values}) => {
+                                    await db.insert(ProductsTable).values({
+                                        SKU: scanningResult.data,
+                                        TypeBarCode: scanningResult.type,
+                                        Name: values.Name,
+                                        Amount: values.Amount,
+                                        Value: values.Value,
+                                        Currency: TypeCurrency.COP,
+                                    })
+                                },
+                            } satisfies ModalAddItemProps)
+
+                            setEnabledScanner(false);
+                        }, 1_000);
+                    }}
+                    onAdd={() => {
+
+                    }}
+                />
             </CameraView>
         </View>
     );
