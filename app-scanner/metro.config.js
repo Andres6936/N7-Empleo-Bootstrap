@@ -1,6 +1,12 @@
 const {getDefaultConfig} = require('expo/metro-config');
+const {withTamagui} = require('@tamagui/metro-plugin');
 
 /** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(__dirname);
 config.resolver.sourceExts.push('sql');
-module.exports = config;
+config.resolver.unstable_enablePackageExports = false;
+
+module.exports = withTamagui(config, {
+    components: ['tamagui', '@tamagui/lucide-icons'],
+    config: './tamagui.config.ts',
+});
